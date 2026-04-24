@@ -4,235 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Phil's STORE — Yale MUNCHKINS</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍪</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{background:#0A0A0A;color:#eee;font-family:'DM Sans',sans-serif;overflow-x:hidden;}
-    :root{--gold:#D4A843;--gold2:#F5C842;--dark:#0A0A0A;}
-    .cor{font-family:'Cormorant Garamond',serif;}
-    .dm{font-family:'DM Sans',sans-serif;}
-    @keyframes float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1deg)}}
-    @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(212,168,67,0.45)}50%{box-shadow:0 0 0 14px rgba(212,168,67,0)}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    .float{animation:float 5s ease-in-out infinite;}
-    .fade-up{opacity:0;animation:fadeUp 0.7s ease forwards;}
-    .d1{animation-delay:0.1s}.d2{animation-delay:0.3s}.d3{animation-delay:0.5s}.d4{animation-delay:0.7s}
-    .gold-text{background:linear-gradient(90deg,#C8942A,#F5C842,#C8942A,#F5C842);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.6);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,168,67,0.12);transition:background 0.4s;}
-    nav.solid{background:rgba(8,8,8,0.97);}
-    .logo-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:1px;line-height:1;}
-    .logo-sub{font-family:'DM Sans',sans-serif;font-size:8px;color:#3a3a3a;letter-spacing:3px;text-transform:uppercase;}
-    .nav-links{display:flex;gap:24px;align-items:center;}
-    .nav-link{background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#666;transition:color 0.2s;padding:4px 0;text-decoration:none;}
-    .nav-link:hover,.nav-link.hi{color:var(--gold);}
-    .mob-toggle{display:none;background:none;border:1px solid #333;border-radius:4px;color:#aaa;padding:8px 12px;cursor:pointer;font-size:18px;}
-    .mob-menu{display:none;position:fixed;top:64px;left:0;right:0;z-index:99;background:rgba(8,8,8,0.98);border-bottom:1px solid #1e1e1e;flex-direction:column;}
-    .mob-menu.open{display:flex;}
-    .mob-link{background:none;border:none;border-bottom:1px solid #111;color:#aaa;font-family:'DM Sans',sans-serif;font-size:15px;padding:14px 24px;cursor:pointer;text-align:left;text-decoration:none;display:block;}
-    .mob-link:hover{color:var(--gold);}
-    .btn-gold{background:linear-gradient(135deg,#C8942A,#F0C040,#C8942A);background-size:200%;color:#0A0A0A;border:none;border-radius:6px;padding:16px 28px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.35s;display:inline-block;text-align:center;}
-    .btn-gold:hover{background-position:right;transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,168,67,0.4);}
-    .btn-outline{background:transparent;border:1px solid #333;border-radius:6px;color:#888;padding:16px 28px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.25s;}
-    .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
-    .btn-wa{width:100%;padding:18px;border-radius:6px;background:linear-gradient(135deg,#25D366,#1da851);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.25s;}
-    .btn-wa:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,211,102,0.35);}
-    .btn-wa:disabled{background:#1a1a1a;color:#444;cursor:not-allowed;}
-    .gold-line{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-    .sec{padding:88px 32px;}
-    .sec-label{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--gold);letter-spacing:5px;text-transform:uppercase;display:block;margin-bottom:12px;}
-    .hero-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:64px;}
-    .hero-img-side{background:radial-gradient(ellipse at center,#1e0d00 0%,#0a0500 70%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:48px 32px;}
-    .hero-txt-side{background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:56px 48px;}
-    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
-    .hero-ctas .btn-gold,.hero-ctas .btn-outline{flex:1;min-width:140px;}
-    .ring{position:absolute;border-radius:50%;border:1px solid rgba(212,168,67,0.06);pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);}
-    .product-wrap{position:relative;max-width:360px;width:100%;z-index:2;}
-    .product-glow{position:absolute;inset:-30px;background:radial-gradient(ellipse,rgba(212,168,67,0.18) 0%,transparent 70%);filter:blur(20px);pointer-events:none;}
-    .product-frame{position:absolute;inset:-10px;border-radius:20px;border:1px solid rgba(212,168,67,0.4);background:linear-gradient(135deg,rgba(212,168,67,0.05),transparent);pointer-events:none;}
-    .product-img{width:100%;border-radius:14px;display:block;position:relative;box-shadow:0 40px 100px rgba(0,0,0,0.9),0 0 40px rgba(212,168,67,0.1);}
-    .price-badge{position:absolute;top:-18px;right:-18px;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#B8820A,#F5C842);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(212,168,67,0.2),0 8px 24px rgba(212,168,67,0.5);animation:pulse 3s infinite;}
-    .chip-label{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.9);backdrop-filter:blur(10px);border:1px solid rgba(212,168,67,0.3);border-radius:30px;padding:7px 18px;white-space:nowrap;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--gold);letter-spacing:2px;}
-    .mini-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid #1a1a1a;}
-    .mini-icon{text-align:center;}
-    .mini-icon span:first-child{font-size:24px;display:block;margin-bottom:5px;}
-    .mini-icon span:last-child{font-family:'DM Sans',sans-serif;font-size:10px;color:#555;letter-spacing:1px;}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-    .gallery3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:540px;margin:0 auto;}
-    .glass-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:32px 24px;text-align:center;transition:border-color 0.3s,transform 0.3s;}
-    .glass-card:hover{border-color:rgba(212,168,67,0.35);transform:translateY(-4px);}
-    .glass-card-icon{width:64px;height:64px;border-radius:50%;background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;}
-    .price-card{position:relative;padding:36px 28px;border-radius:16px;border:1px solid #1e1e1e;background:#0e0e0e;transition:transform 0.3s,border-color 0.3s;}
-    .price-card:hover{transform:translateY(-4px);border-color:var(--gold);}
-    .price-card.feat{border-color:rgba(212,168,67,0.45);background:rgba(212,168,67,0.04);}
-    .price-badge-top{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#C8942A,#F5C842);color:#0A0A0A;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 18px;border-radius:20px;white-space:nowrap;}
-    .gallery-big{position:relative;max-width:540px;margin:0 auto 24px;}
-    .gallery-big img{width:100%;border-radius:16px;display:block;box-shadow:0 30px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(212,168,67,0.2);}
-    .gallery-big-glow{position:absolute;inset:-20px;border-radius:28px;background:radial-gradient(ellipse,rgba(212,168,67,0.12) 0%,transparent 70%);filter:blur(16px);pointer-events:none;}
-    .gallery-overlay{position:absolute;bottom:18px;left:18px;background:rgba(8,8,8,0.9);backdrop-filter:blur(12px);border:1px solid rgba(212,168,67,0.3);border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px;}
-    .img-thumb{width:100%;display:block;border-radius:10px;filter:brightness(0.75) saturate(0.9);transition:transform 0.35s,filter 0.35s;}
-    .img-thumb:hover{transform:scale(1.05);filter:brightness(1) saturate(1.1);}
-    .thumb-wrap{position:relative;overflow:hidden;border-radius:10px;}
-    .thumb-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.9));padding:20px 10px 10px;border-radius:0 0 10px 10px;}
-    .order-box{background:#0d0d0d;border:1px solid #1e1e1e;border-radius:16px;padding:32px 24px;}
-    .field{width:100%;padding:14px 16px;background:#0a0a0a;border:1px solid #252525;border-radius:6px;color:#eee;font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
-    .field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,168,67,0.1);}
-    .field::placeholder{color:#2a2a2a;}
-    .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .type-card{border:1.5px solid #1e1e1e;border-radius:10px;padding:18px 14px;cursor:pointer;transition:all 0.2s;background:#0d0d0d;text-align:center;}
-    .type-card:hover,.type-card.sel{border-color:var(--gold);}
-    .type-card.sel{background:rgba(212,168,67,0.07);}
-    .qty-row{display:flex;align-items:center;gap:14px;}
-    .qty-btn{width:44px;height:44px;background:#111;border:1px solid #2a2a2a;color:#eee;font-size:20px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;}
-    .qty-btn:hover{border-color:var(--gold);background:rgba(212,168,67,0.08);}
-    .warn-box{margin-top:12px;background:rgba(212,168,67,0.07);border:1px solid rgba(212,168,67,0.25);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
-    .form-divider{border:none;border-top:1px solid #1a1a1a;margin:20px 0;}
-    .label-sm{font-family:'DM Sans',sans-serif;font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:8px;}
-    .success-box{background:rgba(37,211,102,0.05);border:1px solid rgba(37,211,102,0.2);border-radius:16px;padding:52px 24px;text-align:center;display:none;}
-    .success-box.show{display:block;}
-    .order-box.hide{display:none;}
-    footer{background:#050505;padding:44px 20px;text-align:center;}
-    @media(max-width:768px){.hero-wrap{grid-template-columns:1fr;min-height:auto;}.hero-img-side{padding:88px 20px 52px;min-height:60vw;}.hero-txt-side{padding:32px 20px 52px;}.hero-ctas{flex-direction:column;}.grid3{grid-template-columns:1fr;gap:14px;}.grid2{grid-template-columns:1fr;gap:16px;}.gallery3{grid-template-columns:1fr 1fr;}.sec{padding:56px 16px;}.nav-links{display:none;}.mob-toggle{display:block;}}
+    body{background:#0A0A0A;color:#eee;font-family:Arial, sans-serif;overflow-x:hidden;}
+    :root{--gold:#D4A843;--dark:#0A0A0A;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,168,67,0.2);}
+    .btn-gold{background:linear-gradient(135deg,#C8942A,#F0C040);color:#0A0A0A;border:none;border-radius:6px;padding:12px 24px;font-weight:700;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;}
+    .hero{display:flex;flex-direction:column;align-items:center;padding:100px 20px;text-align:center;background:radial-gradient(circle, #1a0d00 0%, #0a0a0a 100%);}
+    .product-img{width:100%;max-width:350px;border-radius:15px;box-shadow:0 0 30px rgba(212,168,67,0.3);margin:20px 0;}
+    .price-card{background:#111;border:1px solid #222;padding:30px;border-radius:15px;margin:20px;width:100%;max-width:400px;}
+    .gold-text{color:var(--gold);font-weight:bold;font-size:1.5em;}
+    .btn-wa{background:#25D366;color:white;padding:15px;border-radius:8px;display:block;text-decoration:none;font-weight:bold;margin-top:20px;}
+    .gallery{padding:40px 20px;background:#080808;text-align:center;}
+    .gallery-img{width:100%;max-width:600px;border-radius:10px;box-shadow:0 10px 20px rgba(0,0,0,0.5);margin:20px 0;}
   </style>
 </head>
 <body>
-<nav id="navbar">
-  <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
-    <span style="font-size:22px;">🍪</span>
-    <div>
-      <div class="logo-name">Phil's STORE</div>
-      <div class="logo-sub">Official · Yale Biscuits</div>
-    </div>
-  </div>
-  <div class="nav-links">
-    <a href="#hero" class="nav-link">Accueil</a>
-    <a href="#produit" class="nav-link">Produit</a>
-    <a href="#tarifs" class="nav-link">Tarifs</a>
-    <a href="#galerie" class="nav-link">Galerie</a>
-    <a href="#commande" class="nav-link hi">Commander</a>
-  </div>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <a href="#commande" class="btn-gold" style="padding:10px 20px;font-size:11px;border-radius:4px;">Commander</a>
-    <button class="mob-toggle" onclick="toggleMenu()">☰</button>
-  </div>
+
+<nav>
+  <div style="color:var(--gold);font-weight:bold;font-size:20px;">🍪 Phil's STORE</div>
+  <a href="#commande" class="btn-gold" style="font-size:12px;">Commander</a>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="#hero" class="mob-link" onclick="closeMenu()">Accueil</a>
-  <a href="#produit" class="mob-link" onclick="closeMenu()">Produit</a>
-  <a href="#tarifs" class="mob-link" onclick="closeMenu()">Tarifs</a>
-  <a href="#galerie" class="mob-link" onclick="closeMenu()">Galerie</a>
-  <a href="#commande" class="mob-link" onclick="closeMenu()" style="color:var(--gold);">Commander</a>
-</div>
-<section id="hero" class="hero-wrap" style="background:linear-gradient(180deg,#0a0500 0%,#0A0A0A 100%);">
-  <div class="hero-img-side">
-    <div class="ring" style="width:380px;height:380px;"></div>
-    <div class="ring" style="width:500px;height:500px;opacity:0.5;"></div>
-    <div class="ring" style="width:620px;height:620px;opacity:0.3;"></div>
-    <div class="product-wrap float">
-      <div class="product-glow"></div>
-      <div class="product-frame"></div>
-      <img class="product-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" alt="Yale MUNCHKINS Choco Chip">
-      <div class="price-badge">
-        <span class="dm" style="font-size:8px;color:#1a0800;font-weight:800;">DES</span>
-        <span class="dm" style="font-size:16px;color:#1a0800;font-weight:900;line-height:1;">300</span>
-        <span class="dm" style="font-size:8px;color:#1a0800;font-weight:700;">FCFA</span>
-      </div>
-      <div class="chip-label">🍫 CHOCO CHIP · CRUNCHY</div>
-    </div>
-  </div>
-  <div class="hero-txt-side">
-    <span class="sec-label fade-up d1">✦ Phil's STORE · Yale Biscuits · 2026 ✦</span>
-    <div class="fade-up d2" style="margin-bottom:8px;">
-      <h1 class="cor" style="font-size:clamp(44px,6vw,76px);font-weight:900;line-height:1;color:#fff;letter-spacing:-1px;">Phil's</h1>
-      <div class="cor gold-text" style="font-size:clamp(42px,5.5vw,70px);font-weight:900;line-height:1;letter-spacing:-1px;">STORE</div>
-    </div>
-    <div class="dm fade-up d2" style="font-size:10px;color:#333;letter-spacing:4px;text-transform:uppercase;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid #1a1a1a;">
-      Powered by Yale Biscuits — MUNCHKINS Choco Chip
-    </div>
-    <div class="fade-up d3" style="border-left:3px solid var(--gold);padding-left:18px;margin-bottom:24px;">
-      <p class="cor" style="font-style:italic;font-size:clamp(15px,2vw,18px);color:#c0c0c0;line-height:1.9;margin-bottom:12px;">
-        Decouvrez les <strong style="color:#fff;font-style:normal;">MUNCHKINS Choco Chip</strong> de Yale. Craquez pour le biscuit qui allie le <em style="color:var(--gold);">croustillant parfait</em> a la <em style="color:var(--gold);">douceur irresistible</em> des pepites de chocolat.
-      </p>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.25);border-radius:30px;padding:8px 18px;">
-        <span class="cor" style="font-weight:700;font-size:15px;color:var(--gold);font-style:italic;">MUNCHKINS — Crunchy, Crispy, Delicious !</span>
-      </div>
-    </div>
-    <div class="mini-icons fade-up d3">
-      <div class="mini-icon"><span>🍫</span><span>Choco Chip</span></div>
-      <div class="mini-icon"><span>✨</span><span>Croustillant</span></div>
-      <div class="mini-icon"><span>👨‍👩‍👧‍👦</span><span>Famille</span></div>
-      <div class="mini-icon"><span>💼</span><span>Revendeur</span></div>
-    </div>
-    <div class="hero-ctas fade-up d4">
-      <a href="#commande" class="btn-gold">Commander maintenant</a>
-      <a href="#tarifs" class="btn-outline">Voir les prix</a>
-    </div>
+
+<section class="hero">
+  <h1 style="font-size:40px;margin-bottom:10px;">Yale <span style="color:var(--gold)">MUNCHKINS</span></h1>
+  <p style="color:#888;">Le biscuit Choco Chip irrésistible de Lomé</p>
+  
+  <img class="product-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" alt="Yale Munchkins Paquets">
+
+  <div id="commande" class="price-card">
+    <p>Prix à l'unité</p>
+    <div class="gold-text">300 FCFA</div>
+    <hr style="margin:15px 0;border:0;border-top:1px solid #333;">
+    <p>Prix au carton (Grossiste)</p>
+    <div class="gold-text">5 500 FCFA</div>
+    
+    <a href="https://wa.me/22893819338?text=Bonjour%20Phil%20STORE,%20je%20souhaite%20commander%20des%20Munchkins" class="btn-wa">
+       COMMANDER VIA WHATSAPP
+    </a>
   </div>
 </section>
-<section id="galerie" class="sec" style="background:#070707;">
-  <div style="max-width:880px;margin:0 auto;text-align:center;">
-    <div class="gallery-big">
-      <div class="gallery-big-glow"></div>
-      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" alt="Yale MUNCHKINS Choco Chip">
-    </div>
-    <div class="gallery3">
-      <div class="thumb-wrap"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" class="img-thumb"></div>
-      <div class="thumb-wrap"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" class="img-thumb"></div>
-      <div class="thumb-wrap"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" class="img-thumb"></div>
-    </div>
-  </div>
+
+<section id="galerie" class="gallery">
+  <h2 style="color:white; margin-bottom: 20px;">Galerie Produit</h2>
+  <p style="color:#666;">Authentique, croustillant, généreux en pépites de chocolat fondantes.</p>
+  
+  <img class="gallery-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgVDhgNDhIeHhcYFHhcFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/2wBDAQ0LCw4NDhwVDhwSExETExUWFxYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhYXFhX/wAARCADIAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc6R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqucpzt3ed3y8vP/standard" alt="Yale Munchkins Paquets Zoom">
 </section>
-<section id="commande" class="sec" style="background:var(--dark);">
-  <div style="max-width:540px;margin:0 auto;">
-    <div class="order-box" id="orderBox">
-      <div style="margin-bottom:22px;">
-        <label class="label-sm">Type de commande</label>
-        <div class="type-grid">
-          <div class="type-card sel" id="card-unite" onclick="setType('unite')">🍪 Sachet (300 FCFA)</div>
-          <div class="type-card" id="card-carton" onclick="setType('carton')">📦 Carton (5 500 FCFA)</div>
-        </div>
-      </div>
-      <div style="margin-bottom:22px;">
-        <label class="label-sm">Quantite</label>
-        <div class="qty-row">
-          <button class="qty-btn" onclick="changeQty(-1)">−</button>
-          <span class="cor" id="qtyDisplay" style="font-size:36px;color:#fff;">1</span>
-          <button class="qty-btn" onclick="changeQty(1)">+</button>
-          <div id="totalDisplay" style="font-size:28px;color:var(--gold);font-weight:700;margin-left:auto;">300 FCFA</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <input class="field" id="nomField" placeholder="Votre nom *">
-        <input class="field" id="telField" placeholder="Telephone *">
-        <input class="field" id="adresseField" placeholder="Adresse de livraison">
-      </div>
-      <button class="btn-wa" id="btnWa" onclick="envoyer()" style="margin-top:26px;">📲 Confirmer via WhatsApp</button>
-    </div>
-    <div class="success-box" id="successBox"><h3>🎉 Commande envoyee !</h3><button onclick="resetForm()">Nouvelle commande</button></div>
-  </div>
-</section>
-<footer>
-  <div class="cor" style="font-size:26px;color:var(--gold);">Phil's STORE</div>
-  <div class="dm" style="font-size:10px;color:#252525;">Yale Biscuits · Togo 2026</div>
+
+<footer style="padding:40px;text-align:center;color:#444;font-size:12px;">
+  © 2026 Phil's STORE · Lomé, Togo
 </footer>
-<script>
-  const WA = "22893819338"; let qty = 1; let type = "unite";
-  function setType(t) { type = t; qty = 1; document.getElementById("qtyDisplay").textContent = "1"; ["unite","carton"].forEach(v => { document.getElementById("card-"+v).classList.toggle("sel", v===t); }); updateTotal(); }
-  function changeQty(d) { qty = Math.max(1, qty + d); document.getElementById("qtyDisplay").textContent = qty; updateTotal(); }
-  function updateTotal() { const p = type === "unite" ? 300 : 5500; document.getElementById("totalDisplay").textContent = (p * qty).toLocaleString("fr-FR") + " FCFA"; }
-  function envoyer() {
-    const nom = document.getElementById("nomField").value; const tel = document.getElementById("telField").value;
-    if (!nom || !tel) { alert("Nom et Tel requis"); return; }
-    const msg = encodeURIComponent("Commande Phil STORE\nClient: "+nom+"\nProduit: "+type+"\nQuantite: "+qty+"\nTotal: "+document.getElementById("totalDisplay").textContent);
-    window.open("https://wa.me/" + WA + "?text=" + msg, "_blank");
-    document.getElementById("orderBox").style.display = "none"; document.getElementById("successBox").style.display = "block";
-  }
-  function resetForm() { location.reload(); }
-  function toggleMenu() { document.getElementById("mobMenu").classList.toggle("open"); }
-  function closeMenu() { document.getElementById("mobMenu").classList.remove("open"); }
-</script>
+
 </body>
 </html>
